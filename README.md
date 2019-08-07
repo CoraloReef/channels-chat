@@ -5,3 +5,5 @@
 # frontend-project-lvl4
 
 Chat application as Simplified Slack
+
+[Heroku live demo](https://calm-beyond-26893.herokuapp.com/)
