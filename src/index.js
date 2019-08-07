@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/application.css';
+import init from './app';
 
 // import faker from 'faker';
 // import gon from 'gon';
@@ -10,5 +11,4 @@ if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
 
-const chatContainer = document.getElementById('chat');
-chatContainer.innerHTML = 'Test';
+init(window.gon);
