@@ -1,20 +1,28 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import reducers from './reducers';
+import App from './components/App';
+import * as actions from './actions';
 
 export default ({ channels }) => {
+  const store = createStore(
+    reducers,
+    compose(
+      applyMiddleware(thunk),
+      window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
+    ),
+  );
+
+  channels.forEach(channel => store.dispatch(actions.addChannel({ channel })));
+
   render(
-    <div className="container">
-      <div className="row">
-        <div className="col-12 col-sm-3">
-          <ul>
-            {channels.map(item => <li key={item.name}>{item.name}</li>)}
-          </ul>
-        </div>
-        <div className="col-12 col-sm-9">
-          Content
-        </div>
-      </div>
-    </div>,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     document.getElementById('chat'),
   );
 };
