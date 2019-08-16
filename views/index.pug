@@ -4,12 +4,8 @@ html(lang="en")
     title= Title
     script.
       var gon = !{JSON.stringify(gon)};
-  body
-    nav.navbar.navbar-expand-lg.navbar-light.bg-faded
-      a.navbar-brand(href="/") Chat
-      button.navbar-toggler(data-toggle="collapse" data-target="#navbarSupportedContent")
-        span.navbar-toggler-icon
-    .container
+  body.bg-light.py-5
+    .container.bg-white.py-3
       #chat
       // block content
     script(src='/assets/main.js')

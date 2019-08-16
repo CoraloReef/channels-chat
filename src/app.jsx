@@ -8,7 +8,7 @@ import reducers from './reducers';
 import App from './components/App';
 import * as actions from './actions';
 
-export default ({ channels }) => {
+export default ({ channels, currentChannelId }) => {
   const store = createStore(
     reducers,
     compose(
@@ -18,6 +18,7 @@ export default ({ channels }) => {
   );
 
   channels.forEach(channel => store.dispatch(actions.addChannel({ channel })));
+  store.dispatch(actions.setCurentChannel({ id: currentChannelId }));
 
   render(
     <Provider store={store}>

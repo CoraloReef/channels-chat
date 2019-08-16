@@ -13,6 +13,13 @@ const channels = handleActions({
   },
 }, { byId: {}, allIds: [] });
 
+const currentChannel = handleActions({
+  [actions.setCurentChannel](state, { payload: { id } }) {
+    return id;
+  },
+}, '');
+
 export default combineReducers({
   channels,
+  currentChannel,
 });

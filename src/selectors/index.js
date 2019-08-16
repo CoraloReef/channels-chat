@@ -1,9 +1,15 @@
 import { createSelector } from 'reselect';
 
-const getChannelById = state => state.channels.byId;
-const getChannelIds = state => state.channels.allIds;
+const getChannelsById = state => state.channels.byId;
+const getChannelsIds = state => state.channels.allIds;
+const getCurrentChannel = state => state.currentChannel;
 
 export const channelsSelector = createSelector(
-  [getChannelById, getChannelIds],
+  [getChannelsById, getChannelsIds],
   (byId, allIds) => allIds.map(id => byId[id]),
+);
+
+export const getCurrentChannelName = createSelector(
+  [getChannelsById, getCurrentChannel],
+  (byId, id) => byId[id].name,
 );

@@ -1,34 +1,50 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { channelsSelector } from '../selectors';
-import connect from '../connect';
+import * as actionCreators from '../actions';
 
 const mapStateToProps = (state) => {
   const channels = channelsSelector(state);
+  const { currentChannel } = state;
   return {
     channels,
+    currentChannel,
   };
 };
 
-@connect(mapStateToProps)
-
 class Channels extends React.Component {
+  handleChoose = (e) => {
+    e.preventDefault();
+  }
 
   renderChannel = ({ id, name }) => {
+    const { currentChannel } = this.props;
+
+    if (currentChannel === id) {
+      return (
+        <li className="list-group-item py-0 active" key={id}>
+          {name}
+        </li>
+      );
+    }
+
     return (
-      <div className="list-group-item list-group-item-action" key={id}>
-        {id} - {name}
-      </div>
+      <li className="list-group-item py-0" key={id}>
+        <a href={`#${id}`} onClick={this.handleChoose}>
+          {name}
+        </a>
+      </li>
     );
   }
 
   render() {
     const { channels } = this.props;
     return (
-      <div className="list-group mb-4">
-        {channels.map(this.renderChannel)}
-      </div>
+      <ul className="list-group">
+        {channels.map(this.renderChannel).reverse()}
+      </ul>
     );
   }
 }
 
-export default Channels;
+export default connect(mapStateToProps, actionCreators)(Channels);
