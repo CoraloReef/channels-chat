@@ -6,6 +6,7 @@ import * as actionCreators from '../actions';
 const mapStateToProps = (state) => {
   const channels = channelsSelector(state);
   const { currentChannel } = state;
+
   return {
     channels,
     currentChannel,
@@ -13,8 +14,10 @@ const mapStateToProps = (state) => {
 };
 
 class Channels extends React.Component {
-  handleChoose = (e) => {
+  handleChoose = id => (e) => {
     e.preventDefault();
+    const { setCurrentChannel } = this.props;
+    setCurrentChannel({ id });
   }
 
   renderChannel = ({ id, name }) => {
@@ -30,7 +33,7 @@ class Channels extends React.Component {
 
     return (
       <li className="list-group-item py-0" key={id}>
-        <a href={`#${id}`} onClick={this.handleChoose}>
+        <a href={`#${id}`} onClick={this.handleChoose(id)}>
           {name}
         </a>
       </li>

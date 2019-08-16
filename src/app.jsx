@@ -18,7 +18,7 @@ export default ({ channels, currentChannelId }) => {
   );
 
   channels.forEach(channel => store.dispatch(actions.addChannel({ channel })));
-  store.dispatch(actions.setCurentChannel({ id: currentChannelId }));
+  store.dispatch(actions.setCurrentChannel({ id: currentChannelId }));
 
   render(
     <Provider store={store}>

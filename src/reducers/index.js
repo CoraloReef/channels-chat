@@ -14,7 +14,7 @@ const channels = handleActions({
 }, { byId: {}, allIds: [] });
 
 const currentChannel = handleActions({
-  [actions.setCurentChannel](state, { payload: { id } }) {
+  [actions.setCurrentChannel](state, { payload: { id } }) {
     return id;
   },
 }, '');
