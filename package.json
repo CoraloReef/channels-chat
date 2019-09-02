@@ -1,6 +1,6 @@
 {
   "name": "chat-coraloreef",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Chat application as Simplified Slack",
   "main": "dist/index.js",
   "engines": {
