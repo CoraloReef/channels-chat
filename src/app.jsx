@@ -4,11 +4,22 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import faker from 'faker';
+import cookies from 'js-cookie';
+import io from 'socket.io-client';
 import reducers from './reducers';
 import App from './components/App';
 import * as actions from './actions';
+import UserContext from './UserContext';
 
-export default ({ channels, currentChannelId }) => {
+const getUsername = () => {
+  if (!cookies.get('username')) {
+    cookies.set('username', faker.name.findName(), { expires: 1 });
+  }
+  return cookies.get('username');
+};
+
+export default ({ channels, messages, currentChannelId }) => {
   const store = createStore(
     reducers,
     compose(
@@ -17,12 +28,21 @@ export default ({ channels, currentChannelId }) => {
     ),
   );
 
+  const socket = io();
+
+  socket.on('newMessage', (message) => {
+    store.dispatch(actions.addMessage({ message: message.data.attributes }));
+  });
+
+  messages.forEach(message => store.dispatch(actions.addMessage({ message })));
   channels.forEach(channel => store.dispatch(actions.addChannel({ channel })));
   store.dispatch(actions.setCurrentChannel({ id: currentChannelId }));
 
   render(
     <Provider store={store}>
-      <App />
+      <UserContext.Provider value={getUsername()}>
+        <App />
+      </UserContext.Provider>
     </Provider>,
     document.getElementById('chat'),
   );

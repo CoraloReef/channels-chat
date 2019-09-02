@@ -13,6 +13,8 @@ const mapStateToProps = (state) => {
   };
 };
 
+@connect(mapStateToProps, actionCreators)
+
 class Channels extends React.Component {
   handleChoose = id => (e) => {
     e.preventDefault();
@@ -50,4 +52,4 @@ class Channels extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, actionCreators)(Channels);
+export default Channels;
