@@ -6,4 +6,4 @@
 
 Chat application as Simplified Slack
 
-[Heroku live demo](https://calm-beyond-26893.herokuapp.com/)
+[Heroku live demo](https://calm-dusk-81774.herokuapp.com/)
