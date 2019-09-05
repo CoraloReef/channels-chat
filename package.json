@@ -1,13 +1,12 @@
 {
   "name": "chat-coraloreef",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Chat application as Simplified Slack",
   "main": "dist/index.js",
   "engines": {
     "node": "9"
   },
   "scripts": {
-    "test": "jest",
     "start": "node dist/bin/slack.js",
     "server": "babel-node server/bin/slack.js",
     "build-server": "babel server --out-dir dist --source-maps inline",

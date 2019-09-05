@@ -1,17 +1,19 @@
 import React from 'react';
 import cn from 'classnames';
 import { connect } from 'react-redux';
-import { messagesSelector } from '../selectors';
+import { messagesSelector, channelsSelector } from '../selectors';
 import * as actionCreators from '../actions';
 import UserContext from '../UserContext';
 
 const mapStateToProps = (state) => {
   const messages = messagesSelector(state);
-  const { currentChannel } = state;
+  const channels = channelsSelector(state);
+  const { currentChannelId } = state;
 
   return {
     messages,
-    currentChannel,
+    channels,
+    currentChannelId,
   };
 };
 
@@ -22,7 +24,7 @@ class Messages extends React.Component {
 
   // eslint-disable-next-line consistent-return
   renderMessage = ({ author, content, channelId }) => {
-    const { currentChannel } = this.props;
+    const { currentChannelId } = this.props;
     const user = this.context;
 
     const messageClass = cn({
@@ -30,7 +32,7 @@ class Messages extends React.Component {
       'bg-light': user === author,
     });
 
-    if (channelId === currentChannel) {
+    if (channelId === currentChannelId) {
       return (
         <div className={messageClass} key={content}>
           <div>
@@ -44,10 +46,20 @@ class Messages extends React.Component {
     }
   }
 
+  getCurrentChannel = () => {
+    const { channels, currentChannelId } = this.props;
+    const channel = channels.filter(c => c.id === currentChannelId);
+    return channel[0];
+  }
+
   render() {
     const { messages } = this.props;
     return (
       <div>
+        <h4 className="mb-4">
+          #
+          {this.getCurrentChannel().name}
+        </h4>
         {messages.map(this.renderMessage)}
       </div>
     );

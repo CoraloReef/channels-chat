@@ -7,8 +7,8 @@ import routes from '../routes';
 import * as actionCreators from '../actions';
 
 const mapStateToProps = (state) => {
-  const { currentChannel } = state;
-  return { currentChannel };
+  const { currentChannelId } = state;
+  return { currentChannelId };
 };
 
 export default @reduxForm({ form: 'newMessage' })
@@ -18,7 +18,7 @@ class FormNewMessage extends React.Component {
   static contextType = UserContext;
 
   handleSubmitMessage = async (values) => {
-    const { reset, currentChannel } = this.props;
+    const { reset, currentChannelId } = this.props;
     const user = this.context;
     const { message } = values;
     const data = {
@@ -26,7 +26,7 @@ class FormNewMessage extends React.Component {
         attributes: { author: user, content: message },
       },
     };
-    const url = routes.channelMessagesPath(currentChannel);
+    const url = routes.channelMessagesPath(currentChannelId);
 
     try {
       await axios.post(url, data);

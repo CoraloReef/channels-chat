@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 const getChannelsById = state => state.channels.byId;
 const getChannelsIds = state => state.channels.allIds;
-const getCurrentChannel = state => state.currentChannel;
+const getCurrentChannelId = state => state.currentChannelId;
 
 const getMessagesById = state => state.messages.byId;
 const getMessagesIds = state => state.messages.allIds;
@@ -13,7 +13,7 @@ export const channelsSelector = createSelector(
 );
 
 export const getCurrentChannelName = createSelector(
-  [getChannelsById, getCurrentChannel],
+  [getChannelsById, getCurrentChannelId],
   (byId, id) => byId[id].name,
 );
 

@@ -5,11 +5,11 @@ import * as actionCreators from '../actions';
 
 const mapStateToProps = (state) => {
   const channels = channelsSelector(state);
-  const { currentChannel } = state;
+  const { currentChannelId } = state;
 
   return {
     channels,
-    currentChannel,
+    currentChannelId,
   };
 };
 
@@ -23,9 +23,9 @@ class Channels extends React.Component {
   }
 
   renderChannel = ({ id, name }) => {
-    const { currentChannel } = this.props;
+    const { currentChannelId } = this.props;
 
-    if (currentChannel === id) {
+    if (currentChannelId === id) {
       return (
         <li className="list-group-item py-0 active" key={id}>
           {name}

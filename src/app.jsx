@@ -33,6 +33,9 @@ export default ({ channels, messages, currentChannelId }) => {
   socket.on('newMessage', (message) => {
     store.dispatch(actions.addMessage({ message: message.data.attributes }));
   });
+  socket.on('newChannel', (channel) => {
+    store.dispatch(actions.addChannel({ channel: channel.data.attributes }));
+  });
 
   messages.forEach(message => store.dispatch(actions.addMessage({ message })));
   channels.forEach(channel => store.dispatch(actions.addChannel({ channel })));
