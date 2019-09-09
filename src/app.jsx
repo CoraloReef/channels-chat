@@ -28,6 +28,8 @@ export default ({ channels, messages, currentChannelId }) => {
     ),
   );
 
+  const defaultChannel = 1;
+
   const socket = io();
 
   socket.on('newMessage', (message) => {
@@ -35,6 +37,13 @@ export default ({ channels, messages, currentChannelId }) => {
   });
   socket.on('newChannel', (channel) => {
     store.dispatch(actions.addChannel({ channel: channel.data.attributes }));
+  });
+  socket.on('removeChannel', (data) => {
+    store.dispatch(actions.setCurrentChannel({ id: defaultChannel }));
+    store.dispatch(actions.removeChannel({ id: data.data.id }));
+  });
+  socket.on('renameChannel', (channel) => {
+    store.dispatch(actions.renameChannel({ channel: channel.data.attributes }));
   });
 
   messages.forEach(message => store.dispatch(actions.addMessage({ message })));
