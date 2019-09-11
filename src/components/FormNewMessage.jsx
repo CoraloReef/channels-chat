@@ -5,6 +5,7 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import UserContext from '../UserContext';
 import routes from '../routes';
 import * as actionCreators from '../actions';
+import FormInput from './FormInput';
 
 const mapStateToProps = (state) => {
   const { currentChannelId } = state;
@@ -16,6 +17,11 @@ export default @reduxForm({ form: 'newMessage' })
 
 class FormNewMessage extends React.Component {
   static contextType = UserContext;
+
+  constructor(props) {
+    super(props);
+    this.inputMessage = React.createRef();
+  }
 
   handleSubmitMessage = async (values) => {
     const { reset, currentChannelId } = this.props;
@@ -31,6 +37,7 @@ class FormNewMessage extends React.Component {
     try {
       await axios.post(url, data);
       reset();
+      this.inputMessage.current.focus();
     } catch (err) {
       throw new SubmissionError({ _error: err.message });
     }
@@ -44,11 +51,14 @@ class FormNewMessage extends React.Component {
         <div className="input-group mb-3">
           <Field
             name="message"
-            component="input"
+            component={FormInput}
             type="text"
             placeholder="Enter your message"
             className="form-control"
             disabled={submitting}
+            required
+            autoFocus
+            inputRef={this.inputMessage}
           />
           <div className="input-group-append">
             <button className="btn btn-outline-secondary" type="submit">{submitting ? 'Sending...' : 'Send'}</button>

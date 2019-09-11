@@ -11,7 +11,7 @@ import App from './components/App';
 import * as actions from './actions';
 import UserContext from './UserContext';
 
-const getUsername = () => {
+const setUsername = () => {
   if (!cookies.get('username')) {
     cookies.set('username', faker.name.findName(), { expires: 1 });
   }
@@ -27,7 +27,7 @@ export default ({ channels, messages, currentChannelId }) => {
     ),
   );
 
-  const defaultChannel = 1;
+  const defaultChannelId = 1;
 
   const socket = io();
 
@@ -38,7 +38,7 @@ export default ({ channels, messages, currentChannelId }) => {
     store.dispatch(actions.addChannel({ channel: channel.data.attributes }));
   });
   socket.on('removeChannel', (data) => {
-    store.dispatch(actions.setCurrentChannel({ id: defaultChannel }));
+    store.dispatch(actions.setCurrentChannel({ id: defaultChannelId }));
     store.dispatch(actions.removeChannel({ id: data.data.id }));
   });
   socket.on('renameChannel', (channel) => {
@@ -51,7 +51,7 @@ export default ({ channels, messages, currentChannelId }) => {
 
   render(
     <Provider store={store}>
-      <UserContext.Provider value={getUsername()}>
+      <UserContext.Provider value={setUsername()}>
         <App />
       </UserContext.Provider>
     </Provider>,

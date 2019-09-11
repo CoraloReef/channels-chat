@@ -35,6 +35,7 @@ class FormNewChannel extends React.Component {
             placeholder="New channel"
             className="form-control"
             disabled={submitting}
+            required
           />
           <div className="input-group-append">
             <button className="btn btn-outline-secondary" type="submit">{submitting ? 'Creating...' : 'Create'}</button>
