@@ -1,10 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import UserContext from '../UserContext';
+import connect from '../connect';
 import routes from '../routes';
-import * as actionCreators from '../actions';
 import FormInput from './FormInput';
 
 const mapStateToProps = (state) => {
@@ -13,7 +12,7 @@ const mapStateToProps = (state) => {
 };
 
 export default @reduxForm({ form: 'newMessage' })
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 
 class FormNewMessage extends React.Component {
   static contextType = UserContext;

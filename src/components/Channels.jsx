@@ -1,9 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import connect from '../connect';
 import { channelsSelector } from '../selectors';
-import * as actionCreators from '../actions';
 import RemoveChannel from './modals/RemoveChannel';
 import RenameChannel from './modals/RenameChannel';
 
@@ -18,7 +17,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 
 class Channels extends React.Component {
   handleChoose = id => (e) => {

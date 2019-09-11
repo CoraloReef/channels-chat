@@ -1,8 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
-import { connect } from 'react-redux';
+import connect from '../connect';
 import { messagesSelector, channelsSelector } from '../selectors';
-import * as actionCreators from '../actions';
 import UserContext from '../UserContext';
 
 const mapStateToProps = (state) => {
@@ -17,7 +16,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 
 class Messages extends React.Component {
   static contextType = UserContext;
