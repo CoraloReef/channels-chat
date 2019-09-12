@@ -1,10 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import axios from 'axios';
-import routes from '../../routes';
-import * as actionCreators from '../../actions';
+import connect from '../../connect';
 
 const mapStateToProps = (state) => {
   const { currentChannelId, modal } = state;
@@ -12,23 +9,20 @@ const mapStateToProps = (state) => {
   return { currentChannelId, modal };
 };
 
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 
 class RenameChannel extends React.Component {
   handleRename = async (values) => {
-    const { currentChannelId, closeModal } = this.props;
+    const { currentChannelId, closeModal, patchChannel } = this.props;
     const { channelName } = values;
 
-    const data = {
-      data: {
-        attributes: { name: channelName },
-      },
+    const channelData = {
+      id: currentChannelId,
+      name: channelName,
     };
 
-    const url = routes.channelPath(currentChannelId);
-
     try {
-      await axios.patch(url, data);
+      await patchChannel(channelData);
       closeModal();
     } catch (err) {
       throw new SubmissionError({ _error: err.message });

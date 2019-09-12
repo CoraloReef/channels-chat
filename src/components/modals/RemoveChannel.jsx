@@ -1,10 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 import { reduxForm, SubmissionError } from 'redux-form';
-import axios from 'axios';
-import routes from '../../routes';
-import * as actionCreators from '../../actions';
+import connect from '../../connect';
 
 const mapStateToProps = (state) => {
   const { currentChannelId, modal } = state;
@@ -12,16 +9,14 @@ const mapStateToProps = (state) => {
   return { currentChannelId, modal };
 };
 
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 
 class RemoveChannel extends React.Component {
   handleRemove = async () => {
-    const { currentChannelId, closeModal } = this.props;
-
-    const url = routes.channelPath(currentChannelId);
+    const { currentChannelId, closeModal, deleteChannel } = this.props;
 
     try {
-      await axios.delete(url);
+      await deleteChannel(currentChannelId);
       closeModal();
     } catch (err) {
       throw new SubmissionError({ _error: err.message });

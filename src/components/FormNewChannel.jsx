@@ -1,21 +1,20 @@
 import React from 'react';
-import axios from 'axios';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import routes from '../routes';
+import connect from '../connect';
+
+@connect()
 
 class FormNewChannel extends React.Component {
   handleSubmitChannel = async (values) => {
-    const { reset } = this.props;
+    const { reset, postChannel } = this.props;
     const { channelName } = values;
-    const data = {
-      data: {
-        attributes: { name: channelName, removable: true },
-      },
+    const channelData = {
+      name: channelName,
+      removable: true,
     };
-    const url = routes.channelsPath();
 
     try {
-      await axios.post(url, data);
+      await postChannel(channelData);
       reset();
     } catch (err) {
       throw new SubmissionError({ _error: err.message });

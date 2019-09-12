@@ -1,9 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import UserContext from '../UserContext';
 import connect from '../connect';
-import routes from '../routes';
 import FormInput from './FormInput';
 
 const mapStateToProps = (state) => {
@@ -23,18 +21,17 @@ class FormNewMessage extends React.Component {
   }
 
   handleSubmitMessage = async (values) => {
-    const { reset, currentChannelId } = this.props;
+    const { reset, currentChannelId, postMessage } = this.props;
     const user = this.context;
     const { message } = values;
-    const data = {
-      data: {
-        attributes: { author: user, content: message },
-      },
+    const messageData = {
+      author: user,
+      content: message,
+      channelId: currentChannelId,
     };
-    const url = routes.channelMessagesPath(currentChannelId);
 
     try {
-      await axios.post(url, data);
+      await postMessage(messageData);
       reset();
       this.inputMessage.current.focus();
     } catch (err) {

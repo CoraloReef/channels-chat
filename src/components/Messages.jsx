@@ -47,8 +47,8 @@ class Messages extends React.Component {
 
   getCurrentChannel = () => {
     const { channels, currentChannelId } = this.props;
-    const channel = channels.filter(c => c.id === currentChannelId);
-    return channel[0];
+    const channel = channels.find(c => c.id === currentChannelId);
+    return channel;
   }
 
   render() {
