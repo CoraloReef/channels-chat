@@ -2,6 +2,7 @@ import React from 'react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import connect from '../connect';
 
+export default @reduxForm({ form: 'newChannel' })
 @connect()
 
 class FormNewChannel extends React.Component {
@@ -44,5 +45,3 @@ class FormNewChannel extends React.Component {
     );
   }
 }
-
-export default reduxForm({ form: 'newChannel' })(FormNewChannel);
