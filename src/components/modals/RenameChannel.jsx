@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
+import i18n from 'i18next';
 import connect from '../../connect';
 
 const mapStateToProps = (state) => {
@@ -46,7 +47,7 @@ class RenameChannel extends React.Component {
         <form onSubmit={handleSubmit(this.handleRename)}>
           <Modal.Header closeButton>
             <Modal.Title>
-              Rename channel
+              {i18n.t('modal rename title')}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -55,15 +56,19 @@ class RenameChannel extends React.Component {
                 name="channelName"
                 component="input"
                 type="text"
-                placeholder="Enter new channel name..."
+                placeholder={i18n.t('modal rename field')}
                 className="form-control"
                 disabled={submitting}
               />
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button className="mr-3" onClick={closeModal}>Cancel</Button>
-            <Button variant="success" type="submit">{submitting ? 'Renaming...' : 'Rename'}</Button>
+            <Button className="mr-3" onClick={closeModal}>{i18n.t('modal close button')}</Button>
+            <Button variant="success" type="submit">
+              {submitting
+                ? i18n.t('modal submit button rename processing')
+                : i18n.t('modal submit button rename')}
+            </Button>
           </Modal.Footer>
         </form>
       </Modal>

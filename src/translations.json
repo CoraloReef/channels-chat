@@ -1,0 +1,22 @@
+{
+  "en": {
+    "translation": {
+      "channels list head": "Channels",
+      "field new message": "Enter your message",
+      "field new channel": "New channel",
+      "submit button create": "Create",
+      "submit button create processing": "Creating...",
+      "submit button send": "Send",
+      "submit button send processing": "Sending...",
+      "modal close button": "Cancel",
+      "modal submit button remove": "Yes",
+      "modal submit button remove processing": "Removing...",
+      "modal submit button rename": "Rename",
+      "modal submit button rename processing": "Renaming...",
+      "modal remove title": "Remove channel",
+      "modal remove body": "Are you sure want to delete this channel and all messages?",
+      "modal rename title": "Rename channel",
+      "modal rename field": "Enter new channel name..."
+    }
+  }
+}

@@ -6,10 +6,13 @@ import thunk from 'redux-thunk';
 import faker from 'faker';
 import cookies from 'js-cookie';
 import io from 'socket.io-client';
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 import reducers from './reducers';
 import App from './components/App';
 import * as actions from './actions';
 import UserContext from './UserContext';
+import translationsObject from './translations.json';
 
 const setUsername = () => {
   if (!cookies.get('username')) {
@@ -27,6 +30,18 @@ export default ({ channels, messages, currentChannelId }) => {
       window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
     ),
   );
+
+  i18n
+    .use(initReactI18next) // passes i18n down to react-i18next
+    .init({
+      resources: translationsObject,
+      lng: 'en',
+      fallbackLng: 'en',
+
+      interpolation: {
+        escapeValue: false,
+      },
+    });
 
   const defaultChannelId = 1;
 

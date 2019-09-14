@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
+import i18n from 'i18next';
 import connect from '../connect';
 
 export default @reduxForm({ form: 'newChannel' })
@@ -32,13 +33,17 @@ class FormNewChannel extends React.Component {
             name="channelName"
             component="input"
             type="text"
-            placeholder="New channel"
+            placeholder={i18n.t('field new channel')}
             className="form-control"
             disabled={submitting}
             required
           />
           <div className="input-group-append">
-            <button className="btn btn-outline-secondary" type="submit">{submitting ? 'Creating...' : 'Create'}</button>
+            <button className="btn btn-outline-secondary" type="submit">
+              {submitting
+                ? i18n.t('submit button create processing')
+                : i18n.t('submit button create')}
+            </button>
           </div>
         </div>
       </form>

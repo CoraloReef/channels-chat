@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
+import i18n from 'i18next';
 import UserContext from '../UserContext';
 import connect from '../connect';
 import FormInput from './FormInput';
@@ -49,7 +50,7 @@ class FormNewMessage extends React.Component {
             name="message"
             component={FormInput}
             type="text"
-            placeholder="Enter your message"
+            placeholder={i18n.t('field new message')}
             className="form-control"
             disabled={submitting}
             required
@@ -57,7 +58,11 @@ class FormNewMessage extends React.Component {
             inputRef={this.inputMessage}
           />
           <div className="input-group-append">
-            <button className="btn btn-outline-secondary" type="submit">{submitting ? 'Sending...' : 'Send'}</button>
+            <button className="btn btn-outline-secondary" type="submit">
+              {submitting
+                ? i18n.t('submit button send processing')
+                : i18n.t('submit button send')}
+            </button>
           </div>
         </div>
       </form>

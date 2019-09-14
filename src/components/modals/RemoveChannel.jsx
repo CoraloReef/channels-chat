@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { reduxForm, SubmissionError } from 'redux-form';
+import i18n from 'i18next';
 import connect from '../../connect';
 
 const mapStateToProps = (state) => {
@@ -39,16 +40,20 @@ class RemoveChannel extends React.Component {
       >
         <Modal.Header closeButton>
           <Modal.Title>
-            Remove channel
+            {i18n.t('modal remove title')}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Are you sure want to delete this channel and all messages?</p>
+          <p>{i18n.t('modal remove body')}</p>
         </Modal.Body>
         <Modal.Footer>
           <form onSubmit={handleSubmit(this.handleRemove)}>
-            <Button className="mr-3" onClick={closeModal}>Cancel</Button>
-            <Button variant="danger" type="submit">{submitting ? 'Removing...' : 'Yes'}</Button>
+            <Button className="mr-3" onClick={closeModal}>{i18n.t('modal close button')}</Button>
+            <Button variant="danger" type="submit">
+              {submitting
+                ? i18n.t('modal submit button remove processing')
+                : i18n.t('modal submit button remove')}
+            </Button>
           </form>
         </Modal.Footer>
       </Modal>
