@@ -1,6 +1,6 @@
 {
-  "name": "chat-coraloreef",
-  "version": "0.1.1",
+  "name": "channels-chat",
+  "version": "1.0.0",
   "description": "Chat application as Simplified Slack",
   "main": "dist/index.js",
   "engines": {
@@ -19,11 +19,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/CoraloReef/frontend-project-lvl4"
+    "url": "git+ssh://git@github.com/CoraloReef/channels-chat"
   },
   "author": "Viacheslav Gordeiko",
   "license": "ISC",
-  "homepage": "https://github.com/CoraloReef/frontend-project-lvl4#readme",
+  "homepage": "https://github.com/CoraloReef/channels-chat#readme",
   "dependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
