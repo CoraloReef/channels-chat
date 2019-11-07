@@ -4,7 +4,6 @@ import { reducer as formReducer } from 'redux-form';
 import _ from 'lodash';
 import * as actions from '../actions';
 
-
 const messages = handleActions({
   [actions.addMessage](state, { payload: { message } }) {
     const { byId, allIds } = state;
