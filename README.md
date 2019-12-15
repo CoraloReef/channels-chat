@@ -7,7 +7,7 @@ Chat application as Simplified Slack
 
 ### Used:
 ```
-Ajax, REST
+Ajax, REST API
 Websockets
 React + Redux + Forms
 Bootstrap on React
