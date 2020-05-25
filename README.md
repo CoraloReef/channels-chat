@@ -14,4 +14,4 @@ Bootstrap on React
 Webpack
 ```
 
-[Heroku live demo](https://calm-dusk-81774.herokuapp.com/) (The first launch is very long)
+[Heroku live demo](https://calm-dusk-81774.herokuapp.com/)
